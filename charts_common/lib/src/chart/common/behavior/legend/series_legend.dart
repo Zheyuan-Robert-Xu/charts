@@ -184,8 +184,27 @@ class SeriesLegend<D> extends Legend<D> {
   @protected
   void onlyKeepSeries(String seriesId) {
     if (!isSeriesAlwaysVisible(seriesId)) {
-      _allSeries?.forEach((element) => _hiddenSeriesList.add(element));
-      _hiddenSeriesList.remove(seriesId);
+      bool checkState = (_allSeries!.length == _hiddenSeriesList.length + 1) &&
+          !_hiddenSeriesList.contains(seriesId);
+      switch (checkState) {
+        case false:
+          {
+            _allSeries?.forEach((element) => _hiddenSeriesList.add(element));
+            _hiddenSeriesList.remove(seriesId);
+          }
+          break;
+        case true:
+          {
+            _hiddenSeriesList.clear();
+          }
+          break;
+        default:
+          {
+            _allSeries?.forEach((element) => _hiddenSeriesList.add(element));
+            _hiddenSeriesList.remove(seriesId);
+          }
+          break;
+      }
     }
   }
 
