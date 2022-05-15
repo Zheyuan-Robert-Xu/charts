@@ -133,9 +133,13 @@ class WidgetLayoutDelegate extends MultiChildLayoutDelegate {
           behaviorOffset = new Offset(0.0, heightOffset);
           break;
         case _HorizontalJustification.rightDrawArea:
-          behaviorOffset = new Offset(
-              behavior.drawAreaBounds!.right - behaviorSize.width,
-              heightOffset);
+          if (behavior.drawAreaBounds != null) {
+            behaviorOffset = new Offset(
+                behavior.drawAreaBounds!.right - behaviorSize.width,
+                heightOffset);
+          } else {
+            behaviorOffset = new Offset(0.0, 0.0);
+          }
           break;
         case _HorizontalJustification.right:
           behaviorOffset =
