@@ -88,11 +88,6 @@ abstract class CartesianChart<D> extends BaseChart<D> {
       chartState.markChartDirty();
     }
 
-    if (domainAxis != null) {
-      chart.domainAxisSpec = domainAxis!;
-      chartState.markChartDirty();
-    }
-
     if (primaryMeasureAxis != prev?.primaryMeasureAxis) {
       chart.primaryMeasureAxisSpec = primaryMeasureAxis;
       chartState.markChartDirty();
