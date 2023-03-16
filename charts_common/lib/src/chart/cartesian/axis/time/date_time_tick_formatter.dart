@@ -157,7 +157,14 @@ class DateTimeTickFormatter implements TickFormatter<DateTime> {
     if (_timeFormatters.keys.first == ANY) {
       formatterFound = true;
     } else {
-      final minTimeBetweenTicks = stepSize?.toInt() ?? 0;
+      var minTimeBetweenTicks = 0;
+      if (stepSize == null) {
+        minTimeBetweenTicks = 0;
+      } else if (stepSize.isInfinite || stepSize.isNaN) {
+        minTimeBetweenTicks = 0;
+      } else {
+        minTimeBetweenTicks = stepSize.toInt();
+      }
 
       // TODO: Skip the formatter if the formatter's step size is
       // smaller than the minimum step size of the data.
